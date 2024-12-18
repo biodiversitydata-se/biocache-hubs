@@ -126,11 +126,11 @@ assets {
 publishing {
     repositories {
         maven {
-            name 'Nexus'
-            url "https://nexus.ala.org.au/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/biodiversitydata-se/biocache-hubs"
             credentials {
-                username = System.getenv('TRAVIS_DEPLOY_USERNAME')
-                password = System.getenv('TRAVIS_DEPLOY_PASSWORD')
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
