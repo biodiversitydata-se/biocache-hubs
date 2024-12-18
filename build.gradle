@@ -1,5 +1,5 @@
 buildscript {
-    version "7.1.1-beta-3"
+    version "7.1.1"
     group "au.org.ala.plugins.grails"
 }
 
@@ -133,16 +133,6 @@ publishing {
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
-/*
-        maven {
-            name 'Nexus'
-            url "https://nexus.ala.org.au/content/repositories/${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases' }"
-            credentials {
-                username = System.getenv('TRAVIS_DEPLOY_USERNAME')
-                password = System.getenv('TRAVIS_DEPLOY_PASSWORD')
-            }
-        }
-*/
     }
     publications {
         mavenJava(MavenPublication) {
