@@ -361,6 +361,8 @@
                                                                                       default="Advanced search"/></a></li>
                     <li><a id="t3" href="#taxaUpload" data-toggle="tab"><g:message code="home.index.navigator03"
                                                                                    default="Batch taxon search"/></a></li>
+                    <li><a id="t7" href="#taxonIDUpload" data-toggle="tab"><g:message code="home.index.navigator07"
+                                                                                  default="Batch taxon ID search"/></a></li>
                     <li><a id="t4" href="#catalogUpload" data-toggle="tab"><g:message code="home.index.navigator04"
                                                                                       default="Catalogue number search"/></a>
                     </li>
@@ -443,6 +445,29 @@
                         </div>
                     </form>
                 </div><!-- end #uploadDiv div -->
+                <div id="taxonIDUpload" class="tab-pane">
+                    <form name="taxonIDUploadForm" id="taxonIDUploadForm"
+                          action="${biocacheServiceUrl}/occurrences/batchSearch" method="POST">
+                        <div class="row">
+                                <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="taxon_ids"><g:message code="home.index.taxonIDUpload.des01"
+                                                  default="Enter a list of taxonIDs, one taxonID per line."/></label>
+                                    <%--<p><input type="hidden" name="MAX_FILE_SIZE" value="2048" class="form-control"><input type="file" class="form-control"></p>--%>
+                                    <textarea name="queries" id="taxon_ids" class="form-control" rows="15" cols="60"></textarea>
+                                </div>
+                                <%--<input type="submit" name="action" value="Download" class="form-control">--%>
+                                <%--&nbsp;OR&nbsp;--%>
+                                <input type="hidden" name="redirectBase"
+                                       value="${serverName}${request.contextPath}/occurrences/search" class="form-control">
+                                <input type="hidden" name="field" value="taxon_id" class="form-control">
+                                <input type="hidden" name="action" value="Search" />
+                                <input type="submit"
+                                       value="${g.message(code:"home.index.taxonIDUpload.button01", default:"Search")}" class="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- end #taxonIDUpload div -->
                 <div id="catalogUpload" class="tab-pane">
                     <form name="catalogUploadForm" id="catalogUploadForm"
                           action="${biocacheServiceUrl}/occurrences/batchSearch" method="POST">
