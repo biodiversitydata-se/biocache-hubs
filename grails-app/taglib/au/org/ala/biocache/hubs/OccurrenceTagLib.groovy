@@ -1293,4 +1293,18 @@ class OccurrenceTagLib {
             }
         }
     }
+
+    /**
+     * Formats the query display for queries from the SBDI ASV-portal.
+     * Instead of displaying a (sometimes very) long list of taxon id:s
+     * the number of taxon_id:s is displayed
+     */
+    def formatQueryDisplay = { attrs, body ->
+        def taxonIdCount = body().toString().findAll("taxon_id:&#34;ASV:").size()
+        if (taxonIdCount > 2) {
+            out << "$taxonIdCount taxon_id:s"
+        } else {
+            out << body()
+        }
+    }
 }

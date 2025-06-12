@@ -329,6 +329,7 @@
                     <alatag:resultCount totalRecords="${sr.totalRecords}" qualityTotalCount="${qualityTotalCount}" />
                     <span class="queryDisplay"><strong>
                         <g:set var="queryToShow"><alatag:sanitizeContent>${raw(queryDisplay)}</alatag:sanitizeContent></g:set>
+                        <g:set var="queryToShow"><alatag:formatQueryDisplay>${raw(queryToShow)}</alatag:formatQueryDisplay></g:set>
                         ${raw(queryToShow) ?: params.taxa ?: params.q}
                     </strong></span>&nbsp;&nbsp;
                     <g:if test="${params.taxa && queryDisplay.startsWith("text:")}">
