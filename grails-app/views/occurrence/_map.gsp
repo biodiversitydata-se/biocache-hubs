@@ -16,7 +16,7 @@
                 <i class="fa fa-map-marker"></i>&nbsp;&nbsp;<g:message code="map.spatialportal.btn.label" default="View in spatial portal"/></a>
         </g:else>
     </g:if>
-    <a href="#downloadMap" role="button" data-toggle="modal" class="btn btn-default btn-sm tooltips" title="<g:message code="map.downloadmaps.btn.title"/>">
+    <a href="#" onclick="exportMap(); return false;" role="button" class="btn btn-default btn-sm tooltips" title="<g:message code="map.downloadmaps.btn.title"/>">
         <i class="fa fa-download"></i>&nbsp;&nbsp;<g:message code="map.downloadmaps.btn.label" default="Download map"/></a>
     <g:if test="${params.wkt}">
         <a href="#downloadWKT" role="button" class="btn btn-default btn-sm tooltips" title="<g:message code="map.downloadwkt.btn.title"/>" onclick="downloadPolygon(); return false;">
@@ -138,6 +138,7 @@
             "Terrain" : new L.Google('TERRAIN'),
             "Satellite" : new L.Google('HYBRID')
         },
+        activeBaseLayer : null,
         layerControl : null,
         currentLayers : [],
         additionalFqs : '',
@@ -244,6 +245,28 @@
             MAP_VAR.drawnItems.addLayer(layer);
             generatePopup(layer, layer._latlng);
             addClickEventForVector(layer);
+        });
+
+        // Intialise and add export control
+        MAP_VAR.exportControl = L.easyPrint({
+            title: 'Export map',
+            position: 'topleft',
+            exportOnly: true,
+            sizeModes: ['Current', 'A4Landscape', 'A4Portrait']
+        }).addTo(MAP_VAR.map);
+
+        MAP_VAR.map.on('baselayerchange', function(e) {
+            if (e.name) {
+                MAP_VAR.activeBaseLayer = e.name;
+                // Google layers cannot be exported
+                if (['Road', 'Terrain', 'Satellite'].includes(e.name)) {
+                    if (MAP_VAR.exportControl._map) {
+                        MAP_VAR.map.removeControl(MAP_VAR.exportControl);
+                    }
+                } else if (!MAP_VAR.exportControl._map) {
+                    MAP_VAR.map.addControl(MAP_VAR.exportControl);
+                }
+            }
         });
 
         L.control.coordinates({position:"bottomright", useLatLngOrder: true}).addTo(MAP_VAR.map); // coordinate plugin
@@ -399,6 +422,14 @@
                 once = false;
             }
         });
+    }
+
+    function exportMap() {
+        if (['Road', 'Terrain', 'Satellite'].includes(MAP_VAR.activeBaseLayer)) {
+            alert('The current base layer cannot be exported. Try the Minimal layer.');
+        } else {
+            MAP_VAR.exportControl.printMap('CurrentSize', 'map');
+        }
     }
 
     // helper to remove tooltips from map

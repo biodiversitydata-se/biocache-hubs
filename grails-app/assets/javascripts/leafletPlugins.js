@@ -9,5 +9,6 @@
 //= require leaflet-plugins/wicket/wicket.js
 //= require leaflet-plugins/wicket/wicket-leaflet.js
 //= require leaflet-plugins/loading/Control.Loading.js
+//= require leaflet-plugins/easyprint/dist/bundle.js
 //= require LeafletToWKT.js
 //= require wicket-world-wrap-fix.js
