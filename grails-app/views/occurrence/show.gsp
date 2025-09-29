@@ -656,7 +656,7 @@
                                 <table class="layerIntersections table table-striped table-bordered table-condensed">
                                     <tbody>
                                     <g:each in="${contextualSampleInfo}" var="sample" status="vs">
-                                        <g:if test="${sample.classification1 && (vs == 0 || (sample.classification1 != contextualSampleInfo.get(vs - 1).classification1 && vs != contextualSampleInfo.size() - 1))}">
+                                        <g:if test="${sample.classification1 && (vs == 0 || (sample.classification1 != contextualSampleInfo.get(vs - 1).classification1))}">
                                             <tr class="sectionName"><td colspan="2">${sample.classification1}</td></tr>
                                         </g:if>
                                         <g:set var="fn"><a href='${grailsApplication.config.getProperty('layersservice.baseUrl')}/layers/view/more/${sample.layerName}' title='more information about this layer'>${sample.layerDisplayName}</a></g:set>
