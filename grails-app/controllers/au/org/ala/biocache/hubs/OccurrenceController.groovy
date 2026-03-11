@@ -473,7 +473,7 @@ class OccurrenceController {
                 }
             }
         } catch (Exception ex) {
-            log.warn "Error getting record details: $ex.message", ex
+            log.warn "Error getting record details: $ex.message"
 
             if (ex.getMessage() && ex.getMessage().contains("HTTP 404")) {
                 render(view: '../occurrenceNotFound', model: [flash: [message: ex.message]])
